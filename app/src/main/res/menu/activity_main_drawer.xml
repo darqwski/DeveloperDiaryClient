@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/main_menu_add_previous"
+            android:icon="@drawable/baseline_calendar_today_black_48dp"
+            android:title="Dodaj dzisiejszą notatke" />
+        <item
+            android:id="@+id/main_menu_month"
+            android:icon="@drawable/baseline_view_module_black_48dp"
+            android:title="Widok miesiąca" />
+        <item
+            android:id="@+id/main_menu_add_event"
+            android:icon="@drawable/baseline_playlist_add_black_48dp"
+            android:title="Dodaj nową czynność" />
+        <item
+            android:id="@+id/main_menu_summary"
+            android:icon="@drawable/baseline_event_note_black_48dp"
+            android:title="Pokaż podsumowanie tygodnia" />
+        <item
+            android:id="@+id/main_menu_stats"
+            android:icon="@drawable/baseline_equalizer_black_48dp"
+            android:title="Statystyki" />
+
+    </group>
+
+</menu>

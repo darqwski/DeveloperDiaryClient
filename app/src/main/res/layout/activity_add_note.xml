@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_add_note"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.darqwski.developerdiary.AddNoteActivity"
+    android:background="@color/colorBackgroundMain">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:text="Podsumowanie dnia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/editNoteTextInput"
+                android:layout_alignParentStart="true"
+                android:id="@+id/addNoteHandText" />
+
+            <GridView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/editNoteHandGrid"
+                android:layout_below="@+id/editNoteEventsText"
+                android:layout_alignParentStart="true"
+                android:numColumns="4"
+                android:horizontalSpacing="2dp"
+                android:verticalSpacing="2dp"
+                android:stretchMode="columnWidth">
+
+            </GridView>
+
+            <TextView
+                android:text="Dodaj wydarzenia do dnia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/editNoteEventsText"
+                android:layout_below="@+id/editNoteEventsGrid"
+                android:layout_alignParentStart="true" />
+
+            <GridView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/editNoteEventsGrid"
+                android:layout_below="@+id/editNoteTextInput"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="35dp"
+                android:numColumns="5"
+                android:horizontalSpacing="2dp"
+                android:verticalSpacing="3dp">
+
+            </GridView>
+
+            <TextView
+                android:text="Krótki opis"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/editNoteTextText"
+                android:layout_below="@+id/editNoteHandGrid"
+                android:layout_alignParentStart="true" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/editNoteTextInput"
+                android:background="@drawable/border_radius_events"
+                android:padding="5dp"
+                android:layout_below="@+id/addNoteTitleText"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:singleLine="false" />
+
+            <Button
+                android:text="Dodaj notatkę"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/editNoteTextInput"
+                android:layout_toEndOf="@+id/editNoteTextText"
+                android:layout_marginTop="38dp"
+                android:id="@+id/addNoteSendButton"
+                android:background="@drawable/button_brown_ripple"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:id="@+id/hiddenTextBar" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

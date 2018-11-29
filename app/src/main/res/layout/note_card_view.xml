@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorBackgroundMain"
+    android:clickable="false"
+    android:minHeight="150dp"
+    android:padding="8dp"
+    android:clipChildren="true"
+    android:gravity="top|fill|clip_vertical|clip_horizontal"
+    android:clipToPadding="true"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/noteCardTopRelative"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <GridView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/NoteGridIcons"
+            android:clickable="false"
+            android:gravity="center|fill"
+            android:stretchMode="columnWidth"
+            android:numColumns="2"
+            android:focusableInTouchMode="true"
+            android:focusable="false"
+            android:layout_marginLeft="10dp"
+            android:horizontalSpacing="3dp"
+            android:verticalSpacing="3dp"
+            android:layout_alignParentEnd="true"
+            android:layout_toEndOf="@+id/NoteCardDateMonth"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentTop="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/NoteCardDateDay"
+            android:text="12"
+            android:textSize="30sp"
+            android:background="@drawable/circle_text_view"
+            android:textColor="@android:color/white"
+            android:gravity="center"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:text="Paździenik"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/NoteCardDateMonth"
+            android:layout_below="@+id/NoteCardDateDay"
+            android:layout_alignParentStart="true"
+            android:padding="2dp"
+            android:paddingLeft="5dp" />
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            app:srcCompat="@drawable/ok"
+            android:id="@+id/NoteCardHand"
+            android:background="@drawable/border_radius_hand"
+            android:padding="5dp"
+            android:paddingBottom="7dp"
+            android:layout_below="@+id/NoteCardDateMonth"
+            android:layout_alignParentStart="true" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:id="@+id/NoteCardBorder2"
+        android:background="@color/colorPrimaryLight"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/noteCardBellowRelative"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/noteCardTopRelative"
+        android:layout_marginBottom="10dp">
+
+        <ImageView
+            app:srcCompat="@drawable/baseline_edit_white_48dp"
+            android:id="@+id/NoteCardButton"
+            android:layout_width="60dp"
+            android:layout_height="48dp"
+            android:autofillHints="@drawable/button_light_brown_ripple"
+            android:clickable="true"
+            android:background="@drawable/button_light_brown_ripple"
+            android:padding="3dp"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:text="Title of day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/NoteCardTitle"
+            android:padding="5dp"
+            android:textSize="18sp"
+            android:textColor="#000"
+            android:layout_marginLeft="10dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_toEndOf="@+id/NoteCardButton"
+            android:layout_alignParentBottom="true" />
+
+    </RelativeLayout>
+
+</LinearLayout>
