@@ -185,6 +185,7 @@ public class ViewController{
             }
 
         }
+        separedIcons.add(tempIconContainer);
         return separedIcons;
     }
     public static void getCommunicate(Context context,String result){

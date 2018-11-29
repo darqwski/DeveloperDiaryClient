@@ -55,6 +55,12 @@ public class IconContainer {
             case "Transport":
                 this.containerName = "Podróżowanie";
                 break;
+            case "Weather":
+                this.containerName = "Pogoda";
+                break;
+            case "Music":
+                this.containerName = "Muzyka";
+                break;
             default:
                 this.containerName = containerCategory;
                 break;
