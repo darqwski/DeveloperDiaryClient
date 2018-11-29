@@ -22,12 +22,14 @@ import static com.example.darqwski.developerdiary.SuperUtilities.serverAddres;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 Context context;
+        int currentNoteNumber=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         /* Initializing Standard */
         /*    designed by Zlatko Najdenovski  from Flaticon"*/
         /*    designed by Freepik  from Flaticon"*/
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -56,7 +58,7 @@ Context context;
 
         RequestProperties getLists = new RequestProperties()
                 .prepareGetConnection()
-                .setRequestAction("get_notes_from_month");
+                .setRequestAction("get_notes_from_number").addBody("number",String.valueOf(currentNoteNumber));
         new RequestCaller(context,getLists).execute(serverAddres);
 
 
@@ -66,7 +68,7 @@ Context context;
         super.onStart();
         RequestProperties getLists = new RequestProperties()
                 .prepareGetConnection()
-                .setRequestAction("get_notes_from_month");
+                .setRequestAction("get_notes_from_number").addBody("number",String.valueOf(currentNoteNumber));
         new RequestCaller(context,getLists).execute(serverAddres);
     }
     @Override
@@ -125,11 +127,13 @@ Context context;
 
         } else if (id == R.id.main_menu_add_event) {
 
-
             startActivity(new Intent(context,AddEventActivity.class));
 
-
-        } else if (id == R.id.main_menu_summary) {
+        }else if(id == R.id.main_menu_month){
+            Intent intent= new Intent(context,MonthCalendarActivity.class);
+            startActivity(intent);
+        }
+        else if (id == R.id.main_menu_summary) {
 
         } else if (id == R.id.main_menu_stats) {
 

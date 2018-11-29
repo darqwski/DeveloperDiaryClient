@@ -69,36 +69,14 @@ public class AdapterNoteCard extends ArrayAdapter<NoteCard> {
         });
         ((TextView) v.findViewById(R.id.NoteCardDateDay)).setText(String.valueOf(c.get(Calendar.DAY_OF_MONTH)));
         ((TextView) v.findViewById(R.id.NoteCardDateMonth)).setText(month);
-
-        switch(itemView.getHand()){
-            case SuperUtilities.HAND_OK:
-                ((ImageView) v.findViewById(R.id.NoteCardHand)).setImageDrawable(context.getResources().getDrawable(R.drawable.ok));
-                break;
-            case SuperUtilities.HAND_ANGER:
-                ((ImageView) v.findViewById(R.id.NoteCardHand)).setImageDrawable(context.getResources().getDrawable(R.drawable.anger));
-                break;
-            case  SuperUtilities.HAND_BRAVO:
-                ((ImageView) v.findViewById(R.id.NoteCardHand)).setImageDrawable(context.getResources().getDrawable(R.drawable.bravo));
-                break;
-            case  SuperUtilities.HAND_GTFO:
-                ((ImageView) v.findViewById(R.id.NoteCardHand)).setImageDrawable(context.getResources().getDrawable(R.drawable.gtfo));
-                break;
-            case  SuperUtilities.HAND_NOTBAD:
-                ((ImageView) v.findViewById(R.id.NoteCardHand)).setImageDrawable(context.getResources().getDrawable(R.drawable.notbad));
-                break;
-            case  SuperUtilities.HAND_NOTOK:
-                ((ImageView) v.findViewById(R.id.NoteCardHand)).setImageDrawable(context.getResources().getDrawable(R.drawable.notok));
-                break;
-            case  SuperUtilities.HAND_PERFECT:
-                ((ImageView) v.findViewById(R.id.NoteCardHand)).setImageDrawable(context.getResources().getDrawable(R.drawable.perfect));
-                break;
-            case  SuperUtilities.HAND_VICTORY:
-                ((ImageView) v.findViewById(R.id.NoteCardHand)).setImageDrawable(context.getResources().getDrawable(R.drawable.victory));
-                break;
-            default:
-                ((ImageView) v.findViewById(R.id.NoteCardHand)).setImageDrawable(context.getResources().getDrawable(R.drawable.ok));
-                break;
+        ArrayList<HandIcon>handIcons = HandIcon.getHandIcons(getContext());
+        for(int i=0;i<handIcons.size();i++){
+           if( itemView.getHand()==handIcons.get(i).getIconId()){
+               ((ImageView) v.findViewById(R.id.NoteCardHand)).setImageDrawable(handIcons.get(i).getIcon());
+               ((ImageView) v.findViewById(R.id.NoteCardHand)).setBackground(handIcons.get(i).getBackground());
+           }
         }
+
 
         GridView gridIcons = (GridView) v.findViewById(R.id.NoteGridIcons);
         AdapterNoteEvent noteEventAdapter = new AdapterNoteEvent(getContext(),R.layout.note_catd_event_layout,itemView.getEvents());

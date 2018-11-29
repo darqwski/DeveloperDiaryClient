@@ -85,16 +85,17 @@ protected void onPostExecute(String result) {
         return;
         }
         switch (props.getHeader("request-action")){
-        case "get_notes_from_month":
-         ViewController.getNotesFromMonthView(context,result);
-            break;
+            case "get_notes_from_number":
+                ViewController.getNotesFromNumber(context,result);
+                break;
             case "get_all_icons":
-         ViewController.getAllIconsView(context,result);
-            break;
+                ViewController.getAllIconsView(context,result);
+                break;
             case "get_all_events":
-
                 ViewController.getAllEvents(context,result);
-
+                break;
+            case "get_notes_from_month":
+                ViewController.getNotesFromMonth(context,result);
                 break;
 
         case "":

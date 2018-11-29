@@ -19,6 +19,16 @@ public class NoteCard {
     private String ID="";
     private int hand;
     private int flag;
+    private int eventsCount;
+
+    public int getEventsCount() {
+        return eventsCount;
+    }
+
+    public void setEventsCount(int eventsCount) {
+        this.eventsCount = eventsCount;
+    }
+
     public int getHand() {
         return hand;
     }

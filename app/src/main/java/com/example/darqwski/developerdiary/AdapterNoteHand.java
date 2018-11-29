@@ -47,7 +47,9 @@ public class AdapterNoteHand extends ArrayAdapter<HandIcon> {
         v.setLayoutParams(layoutParams);
         ((TextView)v.findViewById(R.id.EventLayoutText)).setText(value.getTitle());
         ((ImageView)v.findViewById(R.id.EventLayoutImage)).setImageDrawable(value.getIcon());
-            if(selectedHand!=value.getIconId())
+        v.findViewById(R.id.EventLayoutImage).setBackground(value.getBackground());
+
+        if(selectedHand!=value.getIconId())
                 v.setBackground(getContext().getDrawable(R.drawable.border_radius_add_events));
             else
                 v.setBackground(getContext().getDrawable(R.drawable.border_radius_minus_events));

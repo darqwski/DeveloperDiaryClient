@@ -13,6 +13,7 @@ import java.net.URLEncoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -151,5 +152,30 @@ public class SuperUtilities {
         String dateTime = dateFormat.format(date);
         return dateTime;
 
+    }
+    public static int getMonthLength(int month){
+        ArrayList<Integer> lengths= new ArrayList<>();
+        lengths.add(31);
+        lengths.add(28);
+        lengths.add(31);
+        lengths.add(30);
+        lengths.add(31);
+        lengths.add(30);
+        lengths.add(31);
+        lengths.add(31);
+        lengths.add(30);
+        lengths.add(31);
+        lengths.add(30);
+        lengths.add(31);
+        return lengths.get(month);
+    }
+    public static boolean isSameDay(Date date1,Date date2){
+        Calendar cal1 = Calendar.getInstance();
+        Calendar cal2 = Calendar.getInstance();
+        cal1.setTime(date1);
+        cal2.setTime(date2);
+        boolean sameDay = cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR) &&
+                cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR);
+        return sameDay;
     }
 }

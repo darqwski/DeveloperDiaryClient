@@ -11,8 +11,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
+import static com.example.darqwski.developerdiary.SuperUtilities.getMonthLength;
+import static com.example.darqwski.developerdiary.SuperUtilities.isSameDay;
 import static com.example.darqwski.developerdiary.SuperUtilities.snackbar;
 
 /**
@@ -20,7 +23,7 @@ import static com.example.darqwski.developerdiary.SuperUtilities.snackbar;
  */
 
 public class ViewController{
-    public static void getNotesFromMonthView(Context context,String result){
+    public static void getNotesFromNumber(Context context, String result){
         final ArrayList<NoteCard> list = new ArrayList<>();
         AdapterNoteCard listAdapter;
         ListView expListView;
@@ -69,6 +72,43 @@ public class ViewController{
         expListView =(ListView) ((Activity)context).findViewById(R.id.mainListView);
         listAdapter = new AdapterNoteCard(context, R.layout.note_card_view,list);
         expListView.setAdapter(listAdapter);
+
+    }
+
+    public static void getNotesFromMonth(Context context, String result){
+        final ArrayList<NoteCard> list = new ArrayList<>();
+        try {
+            JSONObject jObject = new JSONObject(result);
+            JSONArray jsonArray=jObject.getJSONArray("MainArray");
+            for(int i = 0;i<jsonArray.length();i++) {
+                JSONObject actObject = new JSONObject(jsonArray.getString(i));
+                NoteCard noteCard = new NoteCard();
+                noteCard.setID(actObject.getString("ID"));
+                noteCard.setHand(Integer.valueOf(actObject.getString("Hand")));
+                noteCard.setDate(actObject.getString("Date"));
+                noteCard.setEventsCount(Integer.valueOf(actObject.getString("Events")));
+                list.add( noteCard);
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Log.wtf("RESULT",result);
+        }
+
+
+
+
+
+
+
+
+        GridView gridView =(GridView) ((Activity)context).findViewById(R.id.MonthCalendarGrid);
+        gridView.setAdapter(new AdapterCalendar(context,R.layout.single_date_view,getFullArray(list)));
+        SuperUtilities.justifyListViewHeightBasedOnChildren(gridView,7);
+
+
+       // listAdapter = new AdapterNoteCard(context, R.layout.note_card_view,list);
+       // expListView.setAdapter(listAdapter);
 
     }
 
@@ -162,5 +202,29 @@ public class ViewController{
 
         }
         snackbar(context,message);
+    }
+    public static ArrayList<NoteCard> getFullArray(ArrayList<NoteCard> list){
+        Calendar c = Calendar.getInstance();
+        c.setTime(list.get(list.size()-1).getDate());
+        c.set(Calendar.DATE,1);
+        int startWeekDay=(c.get(Calendar.DAY_OF_WEEK)+5)%7;
+        ArrayList<NoteCard> fullList= new ArrayList<>();
+        int listPointer=list.size()-1;
+        int repeats= startWeekDay+getMonthLength(c.get(Calendar.MONTH));
+        repeats+=(7-repeats%7);
+        c.add(Calendar.DAY_OF_MONTH,-startWeekDay);
+        Log.wtf("Day",String.valueOf(c.get(Calendar.DAY_OF_MONTH)));
+        for(int i=0;i<repeats;i++){
+
+            if(isSameDay(c.getTime(),list.get(listPointer).getDate())){
+                fullList.add(list.get(listPointer));
+                if(listPointer!=0)listPointer--;
+            }
+            else{
+                fullList.add(NoteCard.creatingMissingDayInfo(c.getTime()));
+            }
+            c.add(Calendar.DAY_OF_MONTH,1);
+        }
+        return fullList;
     }
 }
