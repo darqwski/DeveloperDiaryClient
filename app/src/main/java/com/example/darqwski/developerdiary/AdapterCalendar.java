@@ -1,6 +1,7 @@
 package com.example.darqwski.developerdiary;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +18,8 @@ import java.util.Date;
  */
 
 public class AdapterCalendar extends ArrayAdapter<NoteCard> {
-
+   public static int filledDaysCount;
+   public static int doneActionsCount;
     ArrayList<NoteCard> items;
     int resource;
     public AdapterCalendar(Context context, int textViewResourceId) {
@@ -52,14 +54,30 @@ public class AdapterCalendar extends ArrayAdapter<NoteCard> {
            if(handIcon!=null){
                v.setBackground(handIcon.getBackground());
                String text="";
-               for(int i=0;i<itemView.getEventsCount();i++)
+                    filledDaysCount++;
+               for(int i=0;i<itemView.getEventsCount();i++){
                    text+=".";
+                   doneActionsCount++;
+               }
                ((TextView)v.findViewById(R.id.SingleDateEvents)).setText(text);
-
+                v.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        SuperUtilities.snackbar(getContext(),"Ten dzień został już uzupełniony");
+                    }
+                });
            }
            else if(c.get(Calendar.MONTH)==middle.get(Calendar.MONTH)){
                v.setBackground(getContext().getResources().getDrawable(R.drawable.hand_background_gray));
                ((TextView)v.findViewById(R.id.SingleDateEvents)).setText("");
+               v.setOnClickListener(new View.OnClickListener() {
+                   @Override
+                   public void onClick(View view) {
+                       Intent intent=new Intent(getContext(),AddNoteActivity.class);
+                       intent.putExtra("seconds",itemView.getDateString());
+                       getContext().startActivity(intent);
+                   }
+               });
            }
            else {
                v.setBackground(getContext().getResources().getDrawable(R.drawable.hand_background_white));

@@ -2,6 +2,7 @@ package com.example.darqwski.developerdiary;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 
 import java.util.ArrayList;
 
@@ -13,6 +14,16 @@ public class HandIcon {
     private Drawable icon;
     private String title;
     private int iconId;
+    private int color;
+
+    public int getColor() {
+        return color;
+    }
+
+    public void setColor(int color) {
+        this.color = color;
+    }
+
 
     public Drawable getBackground() {
         return background;
@@ -29,6 +40,7 @@ public class HandIcon {
         this.title = title;
         this.iconId = iconId;
         this.background=background;
+        this.color=((GradientDrawable)background).getColor().getDefaultColor();
     }
 
     public int getIconId() {

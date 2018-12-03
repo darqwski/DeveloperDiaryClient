@@ -13,7 +13,13 @@ public class NoteEvent {
     private Bitmap icon;
     private String title;
     private String description;
-
+    private String category;
+    private String ID;
+    public static boolean compareNoteEvents(NoteEvent a, NoteEvent b){
+        if(!(a.getTitle() == b.getTitle()))return false;
+        if(!(a.getIconID() == b.getIconID()))return false;
+        return true;
+    }
     public String getCategory() {
         return category;
     }
@@ -22,8 +28,7 @@ public class NoteEvent {
         this.category = category;
     }
 
-    private String category;
-    private String ID;
+
 
     public String getIconID() {
         return iconID;

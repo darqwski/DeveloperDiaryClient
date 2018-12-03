@@ -4,10 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -33,7 +36,10 @@ public class AddNoteActivity extends AppCompatActivity {
             date=new Date();
         else
             date = getDateFromString(intent.getStringExtra("seconds"));
-
+        Log.wtf("Date",intent.getStringExtra("seconds"));
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String dateTime = dateFormat.format(this.date);
+        ((TextView)findViewById(R.id.addNoteHandText)).setText(((TextView)findViewById(R.id.addNoteHandText)).getText()+dateTime.toString().split(" ")[1]);
         RequestProperties requestProperties = new RequestProperties().prepareGetConnection().setRequestAction("get_all_events");
         new RequestCaller(context,requestProperties).execute(serverAddres);
         GridView gridView = (GridView) findViewById(R.id.editNoteHandGrid);

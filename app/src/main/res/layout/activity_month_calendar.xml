@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_month_calendar"
     android:layout_width="match_parent"
@@ -7,38 +8,219 @@
     tools:context="com.example.darqwski.developerdiary.MonthCalendarActivity"
     android:background="@color/colorBackgroundMain">
 
-    <TextView
-        android:text="Listopad 2018"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/MonthCalendarMonthName"
-        android:padding="5dp"
-        android:textColor="#000"
-        android:layout_alignParentEnd="true"
-        android:textSize="28sp"
-        android:textAlignment="center"
-        android:background="#FFF" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="3dp"
-        android:layout_alignParentStart="true"
-        android:id="@+id/MonthCalendarBorder1"
-        android:layout_below="@+id/MonthCalendarMonthName"
-        android:layout_alignParentEnd="true"
-        android:background="@color/colorPrimaryDark" />
-
-    <GridView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:numColumns="7"
-        android:id="@+id/MonthCalendarGrid"
-        android:background="#FFF"
-        android:layout_below="@+id/MonthCalendarBorder1"
-        android:layout_alignParentStart="true"
-        android:horizontalSpacing="2dp"
-        android:verticalSpacing="2dp" />
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FFF">
+
+                <ImageView
+                    android:layout_width="81dp"
+                    android:layout_height="60dp"
+                    app:srcCompat="@drawable/baseline_arrow_back_ios_white_48dp"
+                    android:layout_alignParentStart="true"
+                    android:id="@+id/MonthCalendarLeftArrow"
+                    android:background="@drawable/button_light_brown_ripple"
+                    android:foregroundGravity="center"
+                    android:layout_alignBottom="@+id/MonthCalendarMonthName"
+                    android:layout_alignParentTop="true" />
+
+                <TextView
+                    android:text="Listopad 2018"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/MonthCalendarMonthName"
+                    android:padding="5dp"
+                    android:textColor="#000"
+                    android:textSize="28sp"
+                    android:textAlignment="center"
+                    android:background="#FFF"
+                    android:layout_alignParentTop="true"
+                    android:layout_toEndOf="@+id/MonthCalendarLeftArrow" />
+
+                <ImageView
+                    android:layout_width="81dp"
+                    android:layout_height="60dp"
+                    app:srcCompat="@drawable/baseline_arrow_forward_ios_white_48dp"
+                    android:id="@+id/MonthCalendarRightArrowArrow"
+                    android:background="@drawable/button_light_brown_ripple"
+                    android:foregroundGravity="center"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignBottom="@+id/MonthCalendarMonthName" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_alignParentStart="true"
+                android:id="@+id/MonthCalendarBorder1"
+                android:layout_below="@+id/MonthCalendarMonthName"
+                android:layout_alignParentEnd="true"
+                android:background="@color/colorPrimaryDark" />
+
+            <GridView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:numColumns="7"
+                android:id="@+id/MonthCalendarGrid"
+                android:background="#FFF"
+                android:layout_below="@+id/MonthCalendarBorder1"
+                android:layout_alignParentStart="true"
+                android:horizontalSpacing="2dp"
+                android:verticalSpacing="2dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:id="@+id/MonthCalendarBorder2"
+                android:background="@color/colorPrimaryDark"
+                android:layout_below="@+id/MonthCalendarGrid"
+                android:layout_alignParentStart="true" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/MonthCalendarBorder2"
+                android:layout_alignParentStart="true"
+                android:orientation="horizontal"
+                android:id="@+id/MonthCalendarMainStats"
+                android:background="#FFF">
+
+                <TextView
+                    android:text="Wypełnione"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/MonthCalendarBorder2"
+                    android:id="@+id/MonthCalendarEmptyDays"
+                    android:layout_alignParentEnd="true"
+                    android:layout_toEndOf="@+id/MonthCalendarDoneIcon"
+                    android:layout_row="0"
+                    android:layout_column="0"
+                    android:layout_columnWeight="1"
+                    android:textSize="14sp"
+                    android:textColor="#444"
+                    android:padding="10dp"
+                    android:background="#E2E2E2" />
+
+                <TextView
+                    android:text="28%"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/MonthCalendarEmptyDaysNumber"
+                    android:layout_row="0"
+                    android:layout_column="1"
+                    android:layout_columnWeight="1"
+                    android:padding="10dp"
+                    android:textSize="30sp"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:background="#FFF" />
+                <TextView
+                    android:text="Czynności"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/MonthCalendarBorder2"
+                    android:id="@+id/MonthCalendarDoneActions"
+                    android:layout_alignParentEnd="true"
+                    android:layout_toEndOf="@+id/MonthCalendarDoneIcon"
+                    android:layout_row="0"
+                    android:layout_column="2"
+                    android:layout_columnWeight="1"
+                    android:textSize="14sp"
+                    android:textColor="#444"
+                    android:padding="10dp"
+                    android:background="#E2E2E2" />
+                <TextView
+                    android:text="50"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/MonthCalendarDoneActionsNumber"
+                    android:layout_row="0"
+                    android:layout_column="3"
+                    android:layout_columnWeight="1"
+                    android:padding="10dp"
+                    android:textSize="30sp"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/MonthCalendarMainStats"
+                android:layout_toEndOf="@+id/MonthCalendarBorder2"
+                android:id="@+id/MonthCalendarColors">
+
+                <TextView
+                    android:text="12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/MonthCalendarDayRed"
+                    android:layout_weight="1"
+                    android:textSize="32sp"
+                    android:textColor="#000"
+                    android:padding="10dp"
+                    android:background="@color/red"
+                    android:textAlignment="center"
+                    />
+                <TextView
+                    android:text="12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/MonthCalendarDayYellow"
+                    android:layout_weight="1"
+                    android:textSize="32sp"
+                    android:textColor="#000"
+                    android:padding="10dp"
+                    android:background="@color/yellow"
+                    android:textAlignment="center"
+
+                    />
+                <TextView
+                    android:text="12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/MonthCalendarDayBlue"
+                    android:layout_weight="1"
+                    android:textSize="32sp"
+                    android:textColor="#000"
+                    android:padding="10dp"
+                    android:background="@color/blueLight"
+                    android:textAlignment="center"
+
+                    />
+                <TextView
+                    android:text="12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/MonthCalendarDayGreen"
+                    android:layout_weight="1"
+                    android:textSize="32sp"
+                    android:textColor="#000"
+                    android:padding="10dp"
+                    android:background="@color/greenLight"
+                    android:textAlignment="center"
+
+                    />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
 
 </RelativeLayout>

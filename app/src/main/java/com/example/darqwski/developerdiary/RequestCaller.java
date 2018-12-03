@@ -95,7 +95,7 @@ protected void onPostExecute(String result) {
                 ViewController.getAllEvents(context,result);
                 break;
             case "get_notes_from_month":
-                ViewController.getNotesFromMonth(context,result);
+                ViewController.getNotesFromMonth(context,result,props.getBody("month"),props.getBody("year"));
                 break;
 
         case "":
