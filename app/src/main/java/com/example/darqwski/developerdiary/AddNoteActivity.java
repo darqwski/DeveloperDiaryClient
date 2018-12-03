@@ -39,7 +39,7 @@ public class AddNoteActivity extends AppCompatActivity {
         Log.wtf("Date",intent.getStringExtra("seconds"));
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String dateTime = dateFormat.format(this.date);
-        ((TextView)findViewById(R.id.addNoteHandText)).setText(((TextView)findViewById(R.id.addNoteHandText)).getText()+dateTime.toString().split(" ")[1]);
+        ((TextView)findViewById(R.id.addNoteHandText)).setText(((TextView)findViewById(R.id.addNoteHandText)).getText()+dateTime.toString().split(" ")[0]);
         RequestProperties requestProperties = new RequestProperties().prepareGetConnection().setRequestAction("get_all_events");
         new RequestCaller(context,requestProperties).execute(serverAddres);
         GridView gridView = (GridView) findViewById(R.id.editNoteHandGrid);

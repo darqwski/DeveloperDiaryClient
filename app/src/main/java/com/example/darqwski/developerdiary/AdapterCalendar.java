@@ -3,6 +3,7 @@ package com.example.darqwski.developerdiary;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,6 +47,11 @@ public class AdapterCalendar extends ArrayAdapter<NoteCard> {
         final Calendar c = Calendar.getInstance();
         final Calendar middle = Calendar.getInstance();
         middle.setTime(items.get(items.size()/2).getDate());
+       final Calendar today = Calendar.getInstance();
+        today.setTime(new Date());
+        today.set(Calendar.HOUR,23);
+        today.set(Calendar.MINUTE,59);
+        today.set(Calendar.SECOND,59);
         Date date = itemView.getDate();
         c.setTime(date);
         String day =String.valueOf( c.get(Calendar.DAY_OF_MONTH));
@@ -73,9 +79,16 @@ public class AdapterCalendar extends ArrayAdapter<NoteCard> {
                v.setOnClickListener(new View.OnClickListener() {
                    @Override
                    public void onClick(View view) {
-                       Intent intent=new Intent(getContext(),AddNoteActivity.class);
-                       intent.putExtra("seconds",itemView.getDateString());
-                       getContext().startActivity(intent);
+                       Log.wtf(String.valueOf(today.getTime()),String.valueOf(c.getTime()));
+                       if(today.getTimeInMillis()>=c.getTimeInMillis()){
+                           Intent intent=new Intent(getContext(),AddNoteActivity.class);
+                           intent.putExtra("seconds",itemView.getDateString());
+                           getContext().startActivity(intent);
+                       }
+                       else{
+                           SuperUtilities.snackbar(getContext(),"Ten dzień jeszcze nienastąpił");
+                       }
+
                    }
                });
            }
