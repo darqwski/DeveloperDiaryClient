@@ -11,25 +11,30 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.ContextMenu;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 import static com.example.darqwski.developerdiary.SuperUtilities.serverAddres;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-Context context;
+        Context context;
         int currentNoteNumber=0;
+        public static ArrayList<NoteCard> allNoteCards;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         /* Initializing Standard */
         /*    designed by Zlatko Najdenovski  from Flaticon"*/
         /*    designed by Freepik  from Flaticon"*/
-
+        allNoteCards= new ArrayList<>();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -58,18 +63,30 @@ Context context;
 
         RequestProperties getLists = new RequestProperties()
                 .prepareGetConnection()
-                .setRequestAction("get_notes_from_number").addBody("number",String.valueOf(currentNoteNumber));
+                .setRequestAction("get_notes_from_number").addBody("number",String.valueOf(currentNoteNumber++));
         new RequestCaller(context,getLists).execute(serverAddres);
 
+        ((ListView)findViewById(R.id.mainListView)).addFooterView(generateMainNoteListFooterView());
 
+
+    }
+    public View generateMainNoteListFooterView(){
+        View mainView = LayoutInflater.from(context).inflate(R.layout.main_notecards_footer,null);
+        mainView.findViewById(R.id.footerButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                RequestProperties getLists = new RequestProperties()
+                        .prepareGetConnection()
+                        .setRequestAction("get_notes_from_number").addBody("number",String.valueOf(currentNoteNumber++));
+                new RequestCaller(context,getLists).execute(serverAddres);
+            }
+        });
+        return mainView;
     }
     @Override
     protected void onStart(){
         super.onStart();
-        RequestProperties getLists = new RequestProperties()
-                .prepareGetConnection()
-                .setRequestAction("get_notes_from_number").addBody("number",String.valueOf(currentNoteNumber));
-        new RequestCaller(context,getLists).execute(serverAddres);
+
     }
     @Override
     public void onBackPressed() {
@@ -136,7 +153,7 @@ Context context;
         else if (id == R.id.main_menu_summary) {
 
         } else if (id == R.id.main_menu_stats) {
-
+            startActivity(new Intent(context,StatisticsActivity.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

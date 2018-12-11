@@ -135,4 +135,27 @@ public class MonthCalculations {
 
         return noteEvents;
     }
+     public int getValueFromHand(int handIcon){
+
+         switch (handIcon){
+             case SuperUtilities.HAND_VICTORY:
+                 return 2;
+             case SuperUtilities.HAND_PERFECT:
+                 return 4;
+             case SuperUtilities.HAND_BRAVO:
+                 return 3;
+             case SuperUtilities.HAND_OK:
+                 return 3;
+             case SuperUtilities.HAND_NOTOK:
+                 return 2;
+             case SuperUtilities.HAND_ANGER:
+                 return 1;
+             case SuperUtilities.HAND_GTFO:
+                 return 1;
+
+             default:
+                 return 0;
+         }
+
+    }
 }

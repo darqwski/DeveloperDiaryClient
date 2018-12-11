@@ -14,8 +14,25 @@ public class RequestProperties {
     public ArrayList<String> dataNames = new ArrayList();
     public ArrayList<String> dataValues = new ArrayList();
     String method;
+
+    public boolean isDebug() {
+        return isDebug;
+    }
+
+    boolean isDebug;
     String data;
     int timeOut;
+
+    public String getViewControllerFunction() {
+        return ViewControllerFunction;
+    }
+
+    public RequestProperties setViewControllerFunction(String viewControllerFunction) {
+        ViewControllerFunction = viewControllerFunction;
+        return null;
+    }
+
+    String ViewControllerFunction;
     String defaultAddress = "http://localhost:8080/requester.php";
     final static String METHOD_POST = "POST";
     final static String METHOD_GET = "GET";
@@ -35,6 +52,8 @@ public class RequestProperties {
         addHeader("content-type",contentType);
         addHeader("accept-charset",defaultCharset);
         data="";
+        ViewControllerFunction="";
+        isDebug=false;
     }
     public RequestProperties setValidation(){
         addHeader("Validation","16180339887");
@@ -48,9 +67,14 @@ public class RequestProperties {
         addHeader("request-action",connectionType);
         return this;
     }
+
     public RequestProperties addHeader(String key,String value){
         headerNames.add(key);
         headerValues.add(value);
+        return this;
+    }
+    public RequestProperties setDebug(){
+        isDebug=true;
         return this;
     }
     public String getData(){

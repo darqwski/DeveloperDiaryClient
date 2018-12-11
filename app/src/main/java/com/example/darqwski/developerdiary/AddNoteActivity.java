@@ -36,9 +36,10 @@ public class AddNoteActivity extends AppCompatActivity {
             date=new Date();
         else
             date = getDateFromString(intent.getStringExtra("seconds"));
+
         Log.wtf("Date",intent.getStringExtra("seconds"));
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String dateTime = dateFormat.format(this.date);
+        String dateTime = dateFormat.format(date);
         ((TextView)findViewById(R.id.addNoteHandText)).setText(((TextView)findViewById(R.id.addNoteHandText)).getText()+dateTime.toString().split(" ")[0]);
         RequestProperties requestProperties = new RequestProperties().prepareGetConnection().setRequestAction("get_all_events");
         new RequestCaller(context,requestProperties).execute(serverAddres);
@@ -59,6 +60,7 @@ public class AddNoteActivity extends AppCompatActivity {
                         ;
                 getLists.addBody("title",((EditText)findViewById(R.id.editNoteTextInput)).getText().toString());
                 getLists.addBody("date",getDateString(date));
+                Log.wtf("Date",getDateString(date));
                 getLists.addBody("hand",String.valueOf(selectedHand));
                 for(int i=0;i< addedNoteEvents.size();i++)
                     getLists.addBody("events[]",addedNoteEvents.get(i).getID().toString());

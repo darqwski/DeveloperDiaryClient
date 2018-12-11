@@ -19,6 +19,17 @@
         <item>Listopad</item>
         <item>Grudzień</item>
     </string-array>
+
+    <string-array name="week_names">
+        <item>Poniedział</item>
+        <item>Wtorek</item>
+        <item>Środa</item>
+        <item>Czwartek</item>
+        <item>Piątek</item>
+        <item>Sobota</item>
+        <item>Niedziela</item>
+
+    </string-array>
     <string name="server_message_edit_ok">Notatka została dodana poprawnie</string>
     <string name="server_error">Coś poszło nie tak</string>
     <string name="server_ok">Akcja została wykonana poprawnie</string>

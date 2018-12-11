@@ -56,7 +56,7 @@ public class AdapterNoteCard extends ArrayAdapter<NoteCard> {
         final NoteCard itemView = items.get(position);
         Calendar c = Calendar.getInstance();
         c.setTime(itemView.getDate());
-        String month = context.getResources().getStringArray(R.array.month_names)[c.get(Calendar.MONTH)];
+        String month = context.getResources().getStringArray(R.array.week_names)[(c.get(Calendar.DAY_OF_WEEK)+5)%7];
         ((TextView) v.findViewById(R.id.NoteCardTitle)).setText(itemView.getTitle());
         ((ImageView) v.findViewById(R.id.NoteCardButton)).setOnClickListener(new View.OnClickListener() {
             @Override

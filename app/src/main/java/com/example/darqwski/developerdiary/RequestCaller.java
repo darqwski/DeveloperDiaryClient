@@ -25,7 +25,8 @@ public class RequestCaller  extends AsyncTask<String,String,String> {
         context=newContext;
         }
 protected void onPreExecute(){
-
+            if(props.getViewControllerFunction()=="")
+                props.setViewControllerFunction(props.getHeader("request-action"));
         }
 
 @Override
@@ -76,7 +77,10 @@ protected void onPostExecute(String result) {
     super.onPostExecute(result);
 
         Log.wtf("Responsecode",String.valueOf(responseCode));
+        if(props.isDebug()){
 
+            Log.wtf("ResultOf"+props.getBody("action"),result);
+        }
         /*
         Error Catcher
         **/
@@ -84,7 +88,7 @@ protected void onPostExecute(String result) {
 
         return;
         }
-        switch (props.getHeader("request-action")){
+        switch (props.getViewControllerFunction()){
             case "get_notes_from_number":
                 ViewController.getNotesFromNumber(context,result);
                 break;
@@ -96,6 +100,9 @@ protected void onPostExecute(String result) {
                 break;
             case "get_notes_from_month":
                 ViewController.getNotesFromMonth(context,result,props.getBody("month"),props.getBody("year"));
+                break;
+            case "get_statistics":
+                ViewController.getStatistics(context,result,props.getBody("month"),props.getBody("year"));
                 break;
 
         case "":

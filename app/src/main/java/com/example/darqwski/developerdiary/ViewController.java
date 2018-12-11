@@ -3,6 +3,7 @@ package com.example.darqwski.developerdiary;
 import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
+import android.view.View;
 import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import static com.example.darqwski.developerdiary.MainActivity.allNoteCards;
 import static com.example.darqwski.developerdiary.SuperUtilities.snackbar;
 
 /**
@@ -23,12 +25,16 @@ import static com.example.darqwski.developerdiary.SuperUtilities.snackbar;
 
 public class ViewController{
     public static void getNotesFromNumber(Context context, String result){
-        final ArrayList<NoteCard> list = new ArrayList<>();
+
         AdapterNoteCard listAdapter;
         ListView expListView;
         try {
             JSONObject jObject = new JSONObject(result);
             JSONArray jsonArray=jObject.getJSONArray("MainArray");
+            if(jsonArray.length()==0){
+                snackbar(context,"To koniec twoich notatek");
+                return;
+            }
             for(int i = 0;i<jsonArray.length();i++) {
                 JSONObject actObject = new JSONObject(jsonArray.getString(i));
                 NoteCard noteCard = new NoteCard();
@@ -44,16 +50,16 @@ public class ViewController{
                 }
                 noteCard.setEvents(eventList);
 
-                if(!list.isEmpty()){
-                    int missingDays = (int)((list.get(list.size()-1).getDate().getTime()-(list.get(list.size()-1).getDate().getTime()%(1000*3600*24)))
+                if(!allNoteCards.isEmpty()){
+                    int missingDays = (int)((allNoteCards.get(allNoteCards.size()-1).getDate().getTime()-(allNoteCards.get(allNoteCards.size()-1).getDate().getTime()%(1000*3600*24)))
                             -(noteCard.getDate().getTime()-(noteCard.getDate().getTime()%(1000*3600*24))))/(1000*3600*24);
                     for(int j=1;j<missingDays;j++){
-                        Date newDate=new Date(list.get(list.size()-1).getDate().getTime()-(1000*3600*24));
-                        list.add(NoteCard.creatingMissingDayInfo(newDate));
+                        Date newDate=new Date(allNoteCards.get(allNoteCards.size()-1).getDate().getTime()-(1000*3600*24));
+                        allNoteCards.add(NoteCard.creatingMissingDayInfo(newDate));
                     }
                 }
 
-                list.add( noteCard);
+                allNoteCards.add( noteCard);
             }
 
             ((Activity) context).runOnUiThread(new Runnable() {
@@ -67,10 +73,15 @@ public class ViewController{
             e.printStackTrace();
             Log.wtf("RESULT",result);
         }
-
+        Log.wtf("Resukt",result);
         expListView =(ListView) ((Activity)context).findViewById(R.id.mainListView);
-        listAdapter = new AdapterNoteCard(context, R.layout.note_card_view,list);
+        int index = expListView.getFirstVisiblePosition();
+        View v = expListView.getChildAt(0);
+        int top = (v == null) ? 0 : v.getTop();
+        listAdapter = new AdapterNoteCard(context, R.layout.note_card_view,allNoteCards);
         expListView.setAdapter(listAdapter);
+
+        expListView.setSelectionFromTop(index, top);
 
     }
 
@@ -149,6 +160,40 @@ public class ViewController{
         listAdapter = new AdapterNoteEvent(context, R.layout.add_note_event_layout,list);
         gridView.setAdapter(listAdapter);
         SuperUtilities.justifyListViewHeightBasedOnChildren(gridView,5);
+    }
+    public static void getStatistics(Context context, String result,String monthNumber,String yearNumber){
+        final ArrayList<NoteCard> list = new ArrayList<>();
+        int doneActions = 0;
+
+        try {
+            JSONObject jObject = new JSONObject(result);
+            JSONArray jsonArray=jObject.getJSONArray("MainArray");
+            for(int i = 0;i<jsonArray.length();i++) {
+                JSONObject actObject = new JSONObject(jsonArray.getString(i));
+                NoteCard noteCard = new NoteCard();
+                noteCard.setID(actObject.getString("ID"));
+                noteCard.setHand(Integer.valueOf(actObject.getString("Hand")));
+                noteCard.setDate(actObject.getString("Date"));
+                noteCard.setEventsCount(Integer.valueOf(actObject.getString("Events")));
+                doneActions+=noteCard.getEventsCount();
+                list.add( noteCard);
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Log.wtf("RESULT",result);
+        }
+        Calendar calendar=Calendar.getInstance();
+        calendar.setTime(new Date());
+        Log.wtf("RESULT",result);
+        MonthCalculations monthCalculations = new MonthCalculations(list,context,monthNumber,yearNumber);
+
+        ArrayList<NoteCard>noteCards= monthCalculations.getFullArray();
+        ArrayList<HandIcon>handIcons = HandIcon.getHandIcons(context);
+        final int arraySize = list.size();
+
+
+        //SuperUtilities.justifyListViewHeightBasedOnChildren(gridView,5);
     }
     public static void getAllIconsView(Context context,String result){
         ArrayList<NoteEvent> list = new ArrayList<>();

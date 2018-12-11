@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/colorBackgroundMain"
+    android:background="@drawable/background_light_ripple"
     android:clickable="false"
     android:minHeight="150dp"
     android:padding="8dp"
@@ -15,7 +15,7 @@
 
     <RelativeLayout
         android:id="@+id/noteCardTopRelative"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
         <GridView
@@ -32,9 +32,10 @@
             android:horizontalSpacing="3dp"
             android:verticalSpacing="3dp"
             android:layout_alignParentEnd="true"
-            android:layout_toEndOf="@+id/NoteCardDateMonth"
+            android:layout_toEndOf="@+id/NoteCardDateDay"
+            android:layout_alignParentTop="true"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentTop="true" />
+            android:layout_marginBottom="20dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -48,16 +49,6 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentStart="true" />
 
-        <TextView
-            android:text="Paździenik"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/NoteCardDateMonth"
-            android:layout_below="@+id/NoteCardDateDay"
-            android:layout_alignParentStart="true"
-            android:padding="2dp"
-            android:paddingLeft="5dp" />
-
         <ImageView
             android:layout_width="60dp"
             android:layout_height="60dp"
@@ -67,6 +58,16 @@
             android:padding="5dp"
             android:paddingBottom="7dp"
             android:layout_below="@+id/NoteCardDateMonth"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:text="Paździenik"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/NoteCardDateMonth"
+            android:padding="2dp"
+            android:paddingLeft="5dp"
+            android:layout_below="@+id/NoteCardDateDay"
             android:layout_alignParentStart="true" />
 
     </RelativeLayout>
@@ -79,7 +80,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp" />
+        android:layout_marginTop="20dp" />
 
     <RelativeLayout
         android:layout_width="wrap_content"

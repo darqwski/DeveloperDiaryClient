@@ -18,6 +18,12 @@ public class AddEventActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_event);
         context=this;
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         RequestProperties requestProperties = new RequestProperties().prepareGetConnection().setRequestAction("get_all_icons");
         new RequestCaller(context,requestProperties).execute(serverAddres);
         findViewById(R.id.addEventButton).setOnClickListener(new View.OnClickListener() {
